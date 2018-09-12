@@ -3,25 +3,36 @@ package Parcial.uqbarAlgo3.Parcial.model
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.commons.applicationContext.ApplicationContext
 
-@Accessors//////////
+@Accessors
 @TransactionalAndObservable
 class ContactosModel{
-	Bootstrap bootstrap = new Bootstrap
-	Agenda agenda = new Agenda
+	
 	Contacto contactoSeleccionado
-	Contacto contactoNuevo = new Contacto()
+	String nombreApellidoNuevo 
+	String telefonoNuevo 
+	String emailNuevo 
 	
+	def getContactos() {
+		agenda.contactos
+	}
 	
-	def getContactos(){
-		agenda
+	def Agenda getAgenda(){
+		ApplicationContext.instance.getSingleton(typeof(Contacto))
 	}
 	
 	def agregarContacto(){
-		agenda.agregarContacto(contactoSeleccionado)
-		contactoSeleccionado = null
+		agenda.agregarContacto(new Contacto =>[
+			nombreApellido = nombreApellidoNuevo
+			telefono = telefonoNuevo
+			email = emailNuevo
+		])
+		nombreApellidoNuevo = null
+		telefonoNuevo = null
+		emailNuevo = null
 	}
-
+	
 	def cambiarFavorito(){
 		contactoSeleccionado.toggleFavorito
 	}
@@ -31,14 +42,13 @@ class ContactosModel{
 	 	contactoSeleccionado !== null
 	 }
 	 
-	 @Dependencies("contactoNuevo")
-	 def boolean getEnabledAgregar(){
-	 	validar(contactoNuevo.nombreApellido) && validar(contactoNuevo.telefono) && validar(contactoNuevo.email)
+	 @Dependencies("nombreApellidoNuevo","telefonoNuevo","emailNuevo")
+	 def getEnabledAgregar(){
+	 	validar(nombreApellidoNuevo) && validar(telefonoNuevo) && validar(emailNuevo)
 	 }
 	
-	 def boolean validar(String unString){
+	 def validar(String unString){
 	 	unString !== null && unString !== ""
 	 }
-	
 	
 }

@@ -9,16 +9,18 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
-import org.uqbar.arena.windows.MainWindow
+import org.uqbar.arena.windows.Window
+import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.commons.model.utils.ObservableUtils
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class ContactosWindow extends MainWindow<ContactosModel> {//////////
+class ContactosWindow extends Window<ContactosModel> {
 
-	new(ContactosModel model) {
-		super(model)
+	new(WindowOwner parent) {
+		super(parent,new ContactosModel )
 	}
-
+	
 	override createContents(Panel mainPanel) {
 		mainPanel.layout = new ColumnLayout(2)
 		new Label(mainPanel).text = "Tabla de Contactos"
@@ -27,60 +29,61 @@ class ContactosWindow extends MainWindow<ContactosModel> {//////////
 		panelDer(mainPanel)
 		new Label(mainPanel).text = ""
 		new Label(mainPanel).text = ""
-
 	}
 
 	def panelDer(Panel panel) {
-		var PanelDerecho = new Panel(panel)
+		var Panel PanelDerecho = new Panel(panel)
 		PanelDerecho.layout = new ColumnLayout(2)
 		new Label(PanelDerecho).text = "Nombre y Apellido"
-		new TextBox(PanelDerecho).value <=> "contactoNuevo.nombreApellido"
+		new TextBox(PanelDerecho).value <=> "nombreApellidoNuevo"
 		new Label(PanelDerecho).text = "Telefono"
-		new TextBox(PanelDerecho).value <=> "contactoNuevo.telefono"
+		new TextBox(PanelDerecho).value <=> "telefonoNuevo"
 		new Label(PanelDerecho).text = "Email"
-		new TextBox(PanelDerecho).value <=> "contactoNuevo.email"
+		new TextBox(PanelDerecho).value <=> "emailNuevo"
+		
 		new Button(PanelDerecho) => [
-			enabled <=> "enabledAgregar"
+			bindEnabledToProperty("enabledAgregar")
 			caption = "Agergar"
-			onClick[modelObject.agregarContacto()]
-		]
+			onClick[modelObject.agregarContacto()
+				this.actualizar
+			]
+			]
+	}
+	
+	def actualizar() {
+		ObservableUtils.firePropertyChanged(modelObject,"contactos")
 	}
 
 	def panelIzq(Panel panel) {
-		new Table(panel, typeof(Contacto)) => [
-			numberVisibleRows = 5
+		var Panel PanelIzquierdo = new Panel(panel)
+		var unaTabla = new Table<Contacto>(PanelIzquierdo, typeof(Contacto)) => [
 			items <=> "contactos"
 			value <=> "contactoSeleccionado"
-			new Column(it) => [
+			numberVisibleRows = 5
+			]
+			new Column(unaTabla) => [
 				title = "Nombre y Apellido"
-				fixedSize = 100
 				bindContentsToProperty("nombreApellido")
 			]
-			new Column(it) => [
+			new Column(unaTabla) => [
 				title = "Favorito"
-				fixedSize = 100
 				bindContentsToProperty("favorito").transformer = [Boolean recibe|if(recibe) "SI" else "NO"]
 			]
-		]
-		new Button(panel) => [
+		
+		new Button(PanelIzquierdo) => [
 			caption = "Favorito"
 			onClick[modelObject.cambiarFavorito]
 			bindEnabledToProperty("eneableCambiarFavorito")
 		]
-		new Button(panel) => [
+		new Button(PanelIzquierdo) => [
 			caption = "Editar"
 			onClick[this.editarContactoEnVentana()]
 			bindEnabledToProperty("eneableCambiarFavorito")
 		]
-		
 	}
-	//new EdicionContactoWindow(this,)
+	
 	def editarContactoEnVentana() {
 		new EdicionContactoWindow(this,modelObject.contactoSeleccionado)=>[open]
 	}
-
-	static def void main(String[] args) {
-		new ContactosWindow(new ContactosModel).startApplication
-	}
-
 }
+
