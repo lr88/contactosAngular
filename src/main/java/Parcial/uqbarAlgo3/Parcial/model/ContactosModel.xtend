@@ -7,7 +7,8 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 @Accessors//////////
 @TransactionalAndObservable
 class ContactosModel{
-	
+	Bootstrap bootstrap = new Bootstrap
+	Agenda agenda = new Agenda
 	Contacto contactoSeleccionado
 	Contacto contactoNuevo = new Contacto()
 	
@@ -27,7 +28,7 @@ class ContactosModel{
 	
 	@Dependencies("contactoSeleccionado")
 	 def getEneableCambiarFavorito(){
-	 	contactoSeleccionado != null
+	 	contactoSeleccionado !== null
 	 }
 	 
 	 @Dependencies("contactoNuevo")

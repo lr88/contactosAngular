@@ -6,7 +6,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.annotations.Dependencies
 
-class Bootstrap {/////////
+@Accessors
+class Bootstrap {
 	
 	static def getAgenda() {
 		var agenda = new Agenda
