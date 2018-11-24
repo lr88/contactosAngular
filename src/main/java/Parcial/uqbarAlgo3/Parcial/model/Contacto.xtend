@@ -1,10 +1,11 @@
 package Parcial.uqbarAlgo3.Parcial.model
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.annotations.Dependencies
 import org.uqbar.commons.model.annotations.TransactionalAndObservable
+import org.uqbar.xtrest.api.annotation.Controller
 
+@Controller
 @Accessors
 @TransactionalAndObservable
 class Contacto {

@@ -11,7 +11,7 @@ import org.uqbar.arena.windows.WindowOwner
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import Parcial.uqbarAlgo3.Parcial.model.Contacto
 
-class EdicionContactoWindow extends TransactionalDialog<Contacto> {///////
+class EdicionContactoWindow extends TransactionalDialog<Contacto> {
 
 	new(WindowOwner owner, Contacto model) {
 		super(owner, model)
