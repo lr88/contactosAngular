@@ -9,7 +9,7 @@ import org.uqbar.xtrest.api.annotation.Controller
 @Accessors
 @TransactionalAndObservable
 class Contacto {
-	
+	int id
 	String nombreApellido
 	String email
 	String telefono

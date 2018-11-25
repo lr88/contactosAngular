@@ -56,17 +56,31 @@ class ContactosModel{
 	
 	@Put('/agregarContacto')
 	def Result agregarContacto(@Body String body){
-		print(body)
 		Bootstrap.instance.agenda.agregarContacto(body.fromJson(Contacto))
 		ok('{ "status" : "OK" }');
 	}
 	
 	@Put('/cambiarFavorito')
 	def Result cambiarFavorito(@Body String body){
-		var contactoSeleccionado = getContactosFiltrados.filter[cont | cont.nombreApellido == body.getPropertyValue("nombreApellido")].get(0)
-		contactoSeleccionado.toggleFavorito
-		print(contactoSeleccionado.favorito)
+		encontrarContacto(body).toggleFavorito
 		ok('{ "status" : "OK" }');
+	}
+	
+	def parsearANumero(String body) {
+		return Integer.parseInt(body.getPropertyValue("id"))
+	}
+	
+	@Put('/editarContacto')
+	def Result editarContacto(@Body String body){
+		var Contacto contactoAEditar = encontrarContacto(body)
+		contactoAEditar.nombreApellido = body.getPropertyValue("nombreApellido")
+		contactoAEditar.email = body.getPropertyValue("email")
+		contactoAEditar.telefono = body.getPropertyValue("telefono")
+		ok('{ "status" : "OK" }');
+	}
+	
+	def encontrarContacto(String body){
+		return getContactosFiltrados.filter[cont | cont.id == parsearANumero(body)].get(0)
 	}
 	
 	@Dependencies("contactoSeleccionado")

@@ -11,6 +11,7 @@ class Agenda {
 	List<Contacto> contactos = newArrayList
 	
 	def agregarContacto(Contacto contacto) {
+		contacto.id = contactos.size
 		contactos.add(contacto)
 	}
 	
