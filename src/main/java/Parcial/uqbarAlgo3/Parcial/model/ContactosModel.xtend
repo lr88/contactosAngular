@@ -39,6 +39,11 @@ class ContactosModel{
 		}
 	}
 	
+	@Put('/buscar')
+	def Result buscar(@Body String body){
+		stringBuscado = body.getPropertyValue("stringBuscado")
+		ok('{ "status" : "OK" }');
+	}
 	
 	def getContactosFiltrados(){
 		return contactos.filter[cont | 
@@ -48,17 +53,16 @@ class ContactosModel{
 		].toList
 	}
 	
-	def agregarContacto(){
-		Bootstrap.instance.agenda.agregarContacto(new Contacto =>[
-			nombreApellido = nombreApellidoNuevo
-			telefono = telefonoNuevo
-			email = emailNuevo
-		])
+	
+	@Put('/agregarContacto')
+	def Result agregarContacto(@Body String body){
+		print(body)
+		Bootstrap.instance.agenda.agregarContacto(body.fromJson(Contacto))
+		ok('{ "status" : "OK" }');
 	}
 	
 	@Put('/cambiarFavorito')
 	def Result cambiarFavorito(@Body String body){
-		print(body)
 		var contactoSeleccionado = getContactosFiltrados.filter[cont | cont.nombreApellido == body.getPropertyValue("nombreApellido")].get(0)
 		contactoSeleccionado.toggleFavorito
 		print(contactoSeleccionado.favorito)
