@@ -62,8 +62,23 @@ class ContactosModel{
 	
 	@Put('/cambiarFavorito')
 	def Result cambiarFavorito(@Body String body){
-		encontrarContacto(body).toggleFavorito
+		contactoSeleccionado.toggleFavorito
 		ok('{ "status" : "OK" }');
+	}
+	
+	@Put('/contactoSeleccionado')
+	def Result contactoSeleccionado(@Body String body){
+		contactoSeleccionado = encontrarContacto(body)
+		print(contactoSeleccionado.nombreApellido)
+		ok('{ "status" : "OK" }');
+	}
+	@Get("/contactoSeleccionado")
+	def Result contactoSeleccionado(){
+		try {
+			ok(contactoSeleccionado.toJson) 
+		} catch (Exception e) {
+			internalServerError(e.message)
+		}
 	}
 	
 	def parsearANumero(String body) {
@@ -76,6 +91,7 @@ class ContactosModel{
 		contactoAEditar.nombreApellido = body.getPropertyValue("nombreApellido")
 		contactoAEditar.email = body.getPropertyValue("email")
 		contactoAEditar.telefono = body.getPropertyValue("telefono")
+		contactoSeleccionado = new Contacto()
 		ok('{ "status" : "OK" }');
 	}
 	
