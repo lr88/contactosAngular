@@ -69,7 +69,6 @@ class ContactosModel{
 	@Put('/contactoSeleccionado')
 	def Result contactoSeleccionado(@Body String body){
 		contactoSeleccionado = encontrarContacto(body)
-		print(contactoSeleccionado.nombreApellido)
 		ok('{ "status" : "OK" }');
 	}
 	@Get("/contactoSeleccionado")
