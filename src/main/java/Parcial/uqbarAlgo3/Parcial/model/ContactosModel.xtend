@@ -74,6 +74,7 @@ class ContactosModel{
 	@Get("/contactoSeleccionado")
 	def Result contactoSeleccionado(){
 		try {
+			print(contactoSeleccionado.nombreApellido + "s")
 			ok(contactoSeleccionado.toJson) 
 		} catch (Exception e) {
 			internalServerError(e.message)
@@ -86,11 +87,9 @@ class ContactosModel{
 	
 	@Put('/editarContacto')
 	def Result editarContacto(@Body String body){
-		var Contacto contactoAEditar = encontrarContacto(body)
-		contactoAEditar.nombreApellido = body.getPropertyValue("nombreApellido")
-		contactoAEditar.email = body.getPropertyValue("email")
-		contactoAEditar.telefono = body.getPropertyValue("telefono")
-		contactoSeleccionado = new Contacto()
+		contactoSeleccionado.nombreApellido = body.getPropertyValue("nombreApellido")
+		contactoSeleccionado.email = body.getPropertyValue("email")
+		contactoSeleccionado.telefono = body.getPropertyValue("telefono")
 		ok('{ "status" : "OK" }');
 	}
 	

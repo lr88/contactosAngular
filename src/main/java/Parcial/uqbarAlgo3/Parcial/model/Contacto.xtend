@@ -10,9 +10,9 @@ import org.uqbar.xtrest.api.annotation.Controller
 @TransactionalAndObservable
 class Contacto {
 	int id
-	String nombreApellido = ""
-	String email = ""
-	String telefono = ""
+	String nombreApellido
+	String email 
+	String telefono 
 	Boolean favorito = false
 	
 	def toggleFavorito() {

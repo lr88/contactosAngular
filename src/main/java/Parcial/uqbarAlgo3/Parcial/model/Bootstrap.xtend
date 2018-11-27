@@ -22,49 +22,46 @@ class Bootstrap extends CollectionBasedBootstrap{
 			nombreApellido = "Rick Grimes"
 			email = "rick@hotmail.com"
 			telefono = "1523467980"
+			favorito = false
 		])
 		
 		agenda.agregarContacto(new Contacto() => [
 			nombreApellido = "Walter White"
-			email = "awdsxc@gmail.com"
+			email = "White@gmail.com"
 			telefono = "1523467981"
 			favorito = true
 		])
 		
 		agenda.agregarContacto(new Contacto() => [
 			nombreApellido = "Barry Allen"
-			email = "tdhgthjynd@yahoo.com"
+			email = "Barry@yahoo.com"
 			telefono = "1523467983"
+			
 		])
 		agenda.agregarContacto(new Contacto() => [
-			nombreApellido = "asdrg Allen"
-			email = "sgfasdrg@yahoo.com"
+			nombreApellido = "Ortega  Allen"
+			email = "Ortega@yahoo.com"
 			telefono = "1521237983"
 		])
 		agenda.agregarContacto(new Contacto() => [
-			nombreApellido = "uuuuuuuuu"
-			email = "vbnvbnrtn@yahoo.com"
+			nombreApellido = "Jaime Mora Iglesias"
+			email = "JaimeMoraIglesias@yahoo.com"
 			telefono = "1555467983"
 		])
 		agenda.agregarContacto(new Contacto() => [
-			nombreApellido = "rtyrtyrty"
-			email = "ghjghj@yahoo.com"
+			nombreApellido = "Samuel Fuentes Garcia"
+			email = "SamuelFuentes@yahoo.com"
 			telefono = "152356783"
 		])
 		agenda.agregarContacto(new Contacto() => [
-			nombreApellido = "oooooooooo"
-			email = "erteert@yahoo.com"
+			nombreApellido = "Héctor Dominguez"
+			email = "HéctorDominguez@yahoo.com"
 			telefono = "1876543983"
 		])
 		agenda.agregarContacto(new Contacto() => [
-			nombreApellido = "iuiuiuiuii"
-			email = "qweqweqwe@yahoo.com"
+			nombreApellido = "Adam Cortes"
+			email = "AdamCortes@yahoo.com"
 			telefono = "151237953"
-		])
-		agenda.agregarContacto(new Contacto() => [
-			nombreApellido = "jkhljkl"
-			email = "tyutyu@yahoo.com"
-			telefono = "156821846"
 		])
 		
 	}

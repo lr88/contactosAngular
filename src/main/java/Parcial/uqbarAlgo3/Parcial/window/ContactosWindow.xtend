@@ -64,8 +64,8 @@ class ContactosWindow extends Window<ContactosModel> {
 			bindEnabledToProperty("enabledAgregar")
 			caption = "Agergar"
 			onClick[
-				modelObject.agregarContacto()
-				this.actualizar
+//				modelObject.agregarContacto()
+//				this.actualizar
 			]
 		]
 	}
@@ -92,8 +92,8 @@ class ContactosWindow extends Window<ContactosModel> {
 
 		new Button(PanelIzquierdo) => [
 			caption = "Favorito"
-			onClick[modelObject.cambiarFavorito]
-			bindEnabledToProperty("eneableCambiarFavorito")
+//			onClick[modelObject.cambiarFavorito]
+//			bindEnabledToProperty("eneableCambiarFavorito")
 		]
 		new Button(PanelIzquierdo) => [
 			caption = "Editar"
