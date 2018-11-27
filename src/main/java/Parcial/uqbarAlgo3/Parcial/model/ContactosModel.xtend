@@ -74,7 +74,6 @@ class ContactosModel{
 	@Get("/contactoSeleccionado")
 	def Result contactoSeleccionado(){
 		try {
-			print(contactoSeleccionado.nombreApellido + "s")
 			ok(contactoSeleccionado.toJson) 
 		} catch (Exception e) {
 			internalServerError(e.message)

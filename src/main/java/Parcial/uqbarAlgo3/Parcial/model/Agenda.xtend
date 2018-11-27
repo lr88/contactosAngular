@@ -8,11 +8,13 @@ import org.uqbar.commons.model.annotations.TransactionalAndObservable
 @TransactionalAndObservable
 class Agenda {
 	
+	var int auxid = 0
 	List<Contacto> contactos = newArrayList
 	
 	def agregarContacto(Contacto contacto) {
-		contacto.id = contactos.size
+		contacto.id = auxid 
 		contactos.add(contacto)
+		auxid=auxid+1
 	}
 	
 }
